@@ -477,10 +477,10 @@ a:active{
   background-size: 90rem auto;
 }
 .section-title .section-hero{
-  margin-bottom: +5rem;
+  margin-bottom: 5rem;
 }
 .section-hero .section-inner{
-  padding: +10rem +40rem +2rem 0;
+  padding: 10rem 40rem 2rem 0;
 }
 .container{
   width: 960px;
