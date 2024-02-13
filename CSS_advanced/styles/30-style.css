@@ -644,7 +644,7 @@ ul.row{
   height: 100%;
   position: relative;
 }
-.card-title .card-work a:link{
+.card-title .card-work a{
   display: block;
   text-decoration: none;
   padding-top: 45%;
