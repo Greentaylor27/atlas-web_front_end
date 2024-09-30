@@ -1,0 +1,14 @@
+/* Variables */
+
+$No_pixel: 0px;
+$Ten_pixel: 10px;
+
+/* Style */
+
+body{
+    margin: $No_pixel;
+    padding: $No_pixel;
+    body p{
+        margin: $Ten_pixel;
+    }
+}
