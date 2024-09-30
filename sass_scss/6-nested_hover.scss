@@ -1,0 +1,11 @@
+/* Variable Declaration */
+$Text_color1: #FF0000;
+$Text_color2: #00FF00;
+
+/* Style Sheet */
+button{
+    color: $Text_color1;
+    :hover{
+        color: $Text_color2;
+    }
+}
