@@ -1,8 +1,11 @@
-/* This is my style */
+/* This is my primary color */
+
+$primary_color: #3D3D3D;
+
 body{
-    $color: #3D3D3D;
+    color: $primary_color;
 }
 
 p{
-    $color: #3D3D3D
+    color: $primary_color;
 }
