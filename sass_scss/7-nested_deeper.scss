@@ -1,0 +1,15 @@
+/* Variable Declaration */
+$Font_size1: 14px;
+$Font_size2: 16px;
+$Font_size3: 12px;
+
+/* Style Sheet */
+body {
+    font-size: $Font_size1;
+    h1{
+        font-size: $Font_size2;
+        .smaller{
+            font-size: $Font_size3;
+        }
+    }
+}
