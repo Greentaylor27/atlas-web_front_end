@@ -1,0 +1,11 @@
+/* Variable Declaration */
+$Text_color1: #3D3D3D;
+$Text_color2: #FF0000;
+
+/* Styles */
+body{
+    color: $Text_color1;
+    > .red {
+        color: $Text_color2;
+    }
+}
