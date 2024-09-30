@@ -1,7 +1,7 @@
 /* Style Sheet */
 
 @for $H from 1 through 5 {
-    H#{$H}{
+    h#{$H}{
         font-size: #{$H};
     }
 }
