@@ -1,0 +1,19 @@
+/* variable declarations */
+
+$Text_color: #3D3D3D;
+$Background_color: #6D6D6D;
+
+/* Styles */
+
+body{
+    background-color: $Background_color;
+    color: $Text_color;
+}
+
+p{
+    color: $Text_color;
+}
+
+h2{
+    background-color: $Background_color;
+}
