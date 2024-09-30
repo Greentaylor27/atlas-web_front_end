@@ -5,7 +5,7 @@ $Text_color2: #00FF00;
 /* Style Sheet */
 button{
     color: $Text_color1;
-    :hover{
+    button:hover{
         color: $Text_color2;
     }
 }
