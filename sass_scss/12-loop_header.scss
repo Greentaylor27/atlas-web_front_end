@@ -1,0 +1,7 @@
+/* Style Sheet */
+
+@for $H from 1 through 5 {
+    h#{$H}{
+        font-size: #{$H};
+    }
+}
