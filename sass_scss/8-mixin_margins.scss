@@ -1,0 +1,19 @@
+/* Mixin Decalaration */
+@mixin body {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+@mixin div {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+/* Style Sheet */
+body {
+    @include body();
+}
+
+div {
+    @include div();
+}
