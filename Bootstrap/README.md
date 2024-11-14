@@ -27,3 +27,4 @@ This project is used by the following companies:
 | Task 3 | Taking what we learned from Task 2 and built a responsive header and made a responsive and interactable table |
 | Task 4 | Learned how to make responsive cards in Bootstrap. Made a popout modal with some data and a form |
 | Task 5 | Learned how to make and interactable nav with interactable tabs and nested tabs using list-group and collapse |
+| Task 6 | Made a responsive webpage using display (d-)|
