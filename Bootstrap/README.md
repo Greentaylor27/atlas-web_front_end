@@ -17,8 +17,13 @@ This project is used by the following companies:
 - The author (beginnings of a portfolio piece)
 
 
-## Link to Github Pages
+## Tasks
 
-[link to pages]()
-
-
+| Tasks | Explaination |
+| ----- | ------------ |
+| Task 0 | Make a beautiful README :smile: |
+| Task 1 | Learning how to link bootstrap to HTML |
+| Task 2 | Played with building blocks to learn layouts and breakpoints (Super useful) |
+| Task 3 | Taking what we learned from Task 2 and built a responsive header and made a responsive and interactable table |
+| Task 4 | Learned how to make responsive cards in Bootstrap. Made a popout modal with some data and a form |
+| Task 5 | Learned how to make and interactable nav with interactable tabs and nested tabs using list-group and collapse |
