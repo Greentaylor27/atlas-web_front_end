@@ -17,7 +17,7 @@ function countPrimeNumbers() {
 
 function countPrimeNumbers100Times() {
     for (let count = 1; count <= 100; count++) {
-        console.log(tracker)
+        countPrimeNumbers();
     }
 }
 
