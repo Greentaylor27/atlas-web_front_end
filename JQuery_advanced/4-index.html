@@ -30,8 +30,16 @@
             $('tbody tr td').eq(5).text("Salva");
         }
 
+        function replaceFamilyTree() {
+            /* Completely unnessacary had it in here just in case
+            $('tbody').empty("tr");
+            */
+            $('tbody').html("<tr><td>Gerard</td><td>Bonissa</td></tr>")
+        }
+
         $(document).ready(function() {
             createFamilyTree();
+            replaceFamilyTree();
         });
     </script>
 
