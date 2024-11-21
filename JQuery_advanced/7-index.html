@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Task 7</title>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    </head>
+
+    <body>
+
+    <script type="application/javascript">
+        function createSearchForm() {
+            let form = $("<form></form>");
+            form.append("<input type='text'>");
+            form.append("<input type='submit'>");
+            form.submit(function(event) {
+                event.preventDefault();
+                let search = $("input[type='text']").val();
+
+                queryWikipedia(search);                
+        });
+
+            $('body').prepend(form);
+            $('body').append('<ul>')
+        }
+
+        function addNewArticle(id, title, snippet) {
+            let article = $(`<li><p><span>${id} - </span><b>${title}</b></p><p>${snippet}</p>`);
+            $('ul').append(article);
+        }
+
+        function queryWikipedia(search) {
+            // POSTMAN WAS THE GOAT HERE!!!! also helps I'm use to looking at things like this https://api.scryfall.com/cards/ce582ff6-6a21-418d-b72c-4402a43be7dc?format=json&pretty=true
+            let url = 'https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=' + search
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: 'jsonp',
+                success: (data) => {
+                    let result = data.query.search;
+                    result.forEach((result => {
+                        let id = String(result.pageid);
+                        let title = result.title;
+                        let snippet = result.snippet;
+
+                        addNewArticle(id, title, snippet);
+                    }));
+                },
+                error: (error) => {
+                    console.error("Couldn't find results: ", error);
+                }
+            });
+        }
+
+        $(document).ready(() => {
+            createSearchForm();
+        })
+    </script>
+
+    </body>
+</html>
