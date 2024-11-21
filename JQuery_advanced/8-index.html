@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Task 8</title>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    </head>
+
+    <body>
+
+    <script type="application/javascript">
+
+        let search = '';
+
+        function createSearchForm() {
+            let form = $("<form></form>");
+            form.append("<input type='text'>");
+            form.append("<input type='submit'>");
+            form.submit(function(event) {
+                event.preventDefault();
+                search = $("input[type='text']").val();
+                $('ul').html(' ');
+                queryWikipedia(search);                
+        });
+            const pagin = $('#pagination');
+
+            $('body').prepend(form);
+            $('body').append('<ul>');
+            $('body').append("<ul id='pagination'>");
+            $('#pagination').css("display", "flex");
+            $('#pagination').css("list-style-type", "none");
+        }
+
+        function addNewArticle(id, title, snippet) {
+            let article = $(`<li><p><span>${id} - </span><b>${title}</b></p><p>${snippet}</p>`);
+            $('ul').append(article);
+        }
+
+        function queryWikipedia(search, offset = 0) {
+            // POSTMAN WAS THE GOAT HERE!!!! also helps I'm use to looking at things like this https://api.scryfall.com/cards/ce582ff6-6a21-418d-b72c-4402a43be7dc?format=json&pretty=true
+            let url = 'https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=' + search + "&sroffset=" + offset;
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: 'jsonp',
+                success: (data) => {
+                    let result = data.query.search;
+                    let hits = data.query.searchinfo.totalhits
+                    result.forEach((result) => {
+                        let id = String(result.pageid);
+                        let title = result.title;
+                        let snippet = result.snippet;
+
+                        addNewArticle(id, title, snippet);
+                    });
+                    buildPagination(hits, 10, offset);
+            },
+                error: (error) => {
+                    console.error("Couldn't find results: ", error);
+                }
+            });
+        }
+
+        function buildPagination(numberOfItems, itemsPerPage, currentOffset) {
+            $('#pagination').html('');
+            // Using .ceil() to round up to the nearest whole integer.
+            let pages = Math.ceil(numberOfItems / itemsPerPage);
+            for (let i = 0; i < pages; i++) {
+                let pageNumber = i + 1;
+                let offset = i * itemsPerPage
+                let pagination = $(`<li>${pageNumber}</li>`);
+
+                pagination.css("cursor", "pointer");
+                pagination.css("margin-left", "10px");
+                if (offset === currentOffset) {
+                    pagination.css("font-weight", "bold");
+                }
+
+                pagination.on('click', function() {
+                    if (offset !== currentOffset) {
+                        queryWikipedia(search, offset)
+                    }
+                });
+
+                $('#pagination').append(pagination);
+            }
+        }
+
+        $(document).ready(() => {
+            createSearchForm();
+        })
+    </script>
+
+    </body>
+</html>
