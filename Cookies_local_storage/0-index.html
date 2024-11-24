@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <title>Task 0</title>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="./src/index.js"></script>
+    </head>
+
+    <body>
+        <h1>Login to the website</h1>
+        <label for="firstname"></label>
+        <input type="text" id="firstname" />
+        <label for="email"></label>
+        <input type="text" id="email" />
+        <button type="button" onclick="setCookies();">Log me in</button>
+
+        <h2>Cookies</h2>
+        <button type="button" onclick="showCookies();">Show the cookies</button>
+
+        <script>
+            function setCookies() {
+                let name = document.getElementById("firstname").value;
+                let email = document.getElementById("email").value;
+
+                document.cookie = `firstname=${name}`;
+                document.cookie = `email=${email}`;
+            }
+
+            function showCookies() {
+                let newElement = document.createElement("p");
+                let Cookies = document.cookie;
+
+                newElement.innerText = Cookies;
+                document.body.appendChild(newElement);
+            }
+        </script>
+
+    </body>
+
+
+</html>
