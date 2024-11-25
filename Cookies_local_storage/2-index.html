@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8" />
-        <title>Task 2</title>
+        <title>Task 3</title>
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="./src/index.js"></script>
@@ -23,7 +23,7 @@
             function setCookies() {
                 let date = new Date();
                 date.setTime(date.getTime() + (10 * 24 * 60 * 60 * 1000));
-                let expire = "expires=" + date.toString();
+                let expire = "expires=" + date.toUTCString();
 
                 let name = document.getElementById("firstname").value;
                 let email = document.getElementById("email").value;
@@ -38,10 +38,26 @@
 
             function showCookies() {
                 let newElement = document.createElement("p");
-                let Cookies = document.cookie;
+                let firstName = getCookie('firstname');
+                let email = getCookie('email');
                 
-                newElement.innerText = Cookies;
+                newElement.innerText = `Email: ${email} - Firstname: ${firstName}`;
                 document.body.appendChild(newElement);
+            }
+
+            function getCookie(name) {
+                let Cookies = document.cookie;
+                let cookieArr = Cookies.split(';');
+                
+                
+                for (let i = 0; i < cookieArr.length; i++) {
+                    let cookie = cookieArr[i].trim();
+                    if (cookie.indexOf(name + "=") === 0) {
+                        return cookie.substring(name.length + 1);
+                    }
+                }
+
+                return null;
             }
         </script>
 
