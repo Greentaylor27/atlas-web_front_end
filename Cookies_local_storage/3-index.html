@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <title>Task 3</title>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="./src/index.js"></script>
+    </head>
+
+    <body>
+        <div id="form">
+            <h2>Login to the website</h2>
+            <input type="text" id="firstname" placeholder="Firstname" />
+            <input type="text" id="email" placeholder="Email" />
+            <button type="button" onclick="setCookies();">Log me in</button>
+        </div>
+
+        <script>
+            function setCookies() {
+                let date = new Date();
+                date.setTime(date.getTime() + (10 * 24 * 60 * 60 * 1000));
+                let expire = "expires=" + date.toUTCString();
+
+                let name = document.getElementById("firstname").value;
+                let email = document.getElementById("email").value;
+
+
+                // Console.log here is to track when the expiration date and time is set
+                console.log(expire);
+
+                document.cookie = `firstname=${name}; ${expire}; path=/`;
+                document.cookie = `email=${email}; ${expire}; path=/`;
+                showWelcomeMessageOrForm();
+            }
+
+            /* No longer needed but keeping this here just in case (may need it later on).
+            function showCookies() {
+                let newElement = document.createElement("p");
+                let firstName = getCookie('firstname');
+                let email = getCookie('email');
+                
+                newElement.innerText = `Email: ${email} - Firstname: ${firstName}`;
+                document.body.appendChild(newElement);
+            }
+            */
+
+            function getCookie(name) {
+                let Cookies = document.cookie;
+                let cookieArr = Cookies.split(';');
+                
+                
+                for (let i = 0; i < cookieArr.length; i++) {
+                    let cookie = cookieArr[i].trim();
+                    if (cookie.indexOf(name + "=") === 0) {
+                        return cookie.substring(name.length + 1);
+                    }
+                }
+
+                return null;
+            }
+
+            function showForm() {
+                document.getElementById('form').style.display = "block"
+            }
+
+            function hideForm() {
+                document.getElementById("form").style.display = "none";
+            }
+
+            function deleteCookiesAndShowForm() {
+                document.cookie = `firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+                document.cookie = `email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+                showWelcomeMessageOrForm();
+
+            }
+
+            function showWelcomeMessageOrForm() {
+                let firstName = getCookie('firstname');
+                let email = getCookie('email');
+
+                let welcomeHeader = "h1";
+
+                if (firstName && email) {
+                    hideForm();
+
+
+                    let welcomeMessage = document.createElement("h1");
+                    welcomeMessage.id = "welcomeMessageID"
+                    welcomeMessage.innerHTML = `Welcome: ${firstName} <span onclick="deleteCookiesAndShowForm()">(logout)</span>`;
+                    document.body.appendChild(welcomeMessage);    
+                }
+                else {
+                    let exsistingWelcome = document.getElementById("welcomeMessageID");
+                    if (exsistingWelcome) {
+                        exsistingWelcome.remove();
+                    }
+                    showForm();
+            }
+        }
+
+            window.onload = showWelcomeMessageOrForm;
+        </script>
+
+    </body>
+
+
+</html>
