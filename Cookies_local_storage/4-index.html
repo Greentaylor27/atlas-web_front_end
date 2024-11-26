@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <title>Task 5</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+        <script src="./src/index.js"></script>
+    </head>
+
+    <body>
+        <div id="form">
+            <h2>Login to the website</h2>
+            <input type="text" id="firstname" placeholder="Firstname" />
+            <input type="text" id="email" placeholder="Email" />
+            <button type="button" onclick="setCookiesAndShowWelcomeMessage();">Log me in</button>
+        </div>
+
+        <script>
+            function setCookiesAndShowWelcomeMessage() {
+
+                let name = document.getElementById("firstname").value;
+                let email = document.getElementById("email").value;
+
+                Cookies.set('firstname', name, {expires: 10});
+                Cookies.set('email', email, {expires: 10});
+
+                window.location.reload();
+            }
+
+            function getCookie(name) {
+                return Cookies.get(name);
+            }
+
+            function showForm() {
+                document.getElementById('form').style.display = "block"
+            }
+
+            function hideForm() {
+                document.getElementById("form").style.display = "none";
+            }
+
+            function deleteCookiesAndShowForm() {
+                Cookies.remove('firstname');
+                Cookies.remove('email');
+                window.location.reload();
+            }
+
+            window.onload = function() {
+                const name = Cookies.get('firstname');
+                const email = Cookies.get('email');
+
+                if (name && email) {
+                    hideForm();
+                    let welcomeMessage = document.createElement("h1");
+                    welcomeMessage.id = "welcomeMessageID"
+                    welcomeMessage.innerHTML = `Welcome: ${name} <span onclick="deleteCookiesAndShowForm()">(logout)</span>`;
+                    document.body.appendChild(welcomeMessage);    
+                }
+                else{
+                    let exsistingWelcome = document.getElementById("welcomeMessageID");
+                    if (exsistingWelcome) {
+                        exsistingWelcome.remove();
+                    }
+                    showForm();
+                }
+            }
+
+        </script>
+
+    </body>
+
+
+</html>
