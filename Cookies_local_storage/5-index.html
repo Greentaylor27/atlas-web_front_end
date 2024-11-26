@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <title>Task 5</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+        <script src="./src/index.js"></script>
+    </head>
+
+    <body>
+        
+
+        <script>
+            const availableItems = [
+                "Shampoo",
+                "Soap",
+                "Sponge",
+                "Water"
+            ];
+
+            // Found isStorageEnabled here: https://www.30secondsofcode.org/js/s/is-local-storage-session-storage-enabled/#:~:text=Check%20if%20localStorage%20is%20enabled&text=Using%20Storage.,otherwise%20we%20will%20return%20false%20.
+            function isStorageEnabled() {
+                try {
+                    const key = `__storage__test`;
+                    window.localStorage.setItem(key, null);
+                    window.localStorage.removeItem(key);
+                    return true;
+                }
+                catch (e) {
+                    return false;
+                }
+            }
+            if (isStorageEnabled() === true) {
+                createStore();
+                displayCart();
+            }
+            else {
+                alert("Sorry, your browser does not support Web storage. Try again with a better one");
+            }
+
+            function addItemToCart(item) {
+                window.localStorage.setItem(item, true);
+            }
+
+            function createStore() {
+                const list = document.createElement("ul");
+                document.body.appendChild(list);
+
+                for (let i = 0; i < availableItems.length; i++) {
+                    const listUpdate = document.createElement("li");
+                    const listItem = document.createTextNode(availableItems[i]);
+
+                    listUpdate.addEventListener("click", function() {
+                        addItemToCart(availableItems[i]);
+                    });
+
+                    listUpdate.appendChild(listItem);
+                    list.appendChild(listUpdate);
+                }
+            }
+
+            function displayCart() {
+                if (localStorage.length === 0) {
+                    return;
+                }
+                else {
+                    const para = document.createElement("p");
+                    const text = document.createTextNode(`You previously had ${localStorage.length} items in your cart`);
+
+                    para.appendChild(text);
+                    document.body.appendChild(para);
+                }
+            }
+
+            const keys = Object.keys(localStorage);
+            for (const key of keys) {
+                const value = localStorage.getItem(key);
+                console.log(key, value);
+            }
+
+            // Using localStorage uses machines localStorage so if you have an extensions it will show in the previously had ${localStorage.length}
+        </script>
+    </body>
+</html>
